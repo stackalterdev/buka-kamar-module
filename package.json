@@ -1,0 +1,47 @@
+{
+  "name": "dl-module",
+  "version": "1.1.0",
+  "description": "Dan Liris Modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/index.js",
+    "cover": "istanbul cover _mocha",
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
+    "codeclimate": "codeclimate-test-reporter < ./coverage/lcov.info"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danliris/dl-module.git"
+  },
+  "author": "Moonlay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danliris/dl-module/issues"
+  },
+  "homepage": "https://github.com/danliris/dl-module#readme",
+  "dependencies": {
+    "assert": "^1.4.1",
+    "dl-i18n": "git+https://github.com/danliris/dl-i18n.git",
+    "buka-kamar-model": "https://github.com/stackalterdev/buka-kamar-model#dev",
+    "hashids": "^1.1.0",
+    "module-toolkit": "git+https://github.com/pinkgorilla/module-toolkit.git",
+    "moment": "2.17.1",
+    "mongo-factory": "^1.0.0",
+    "mongodb": "^2.2.5",
+    "mongodb-toolkit": "git+https://github.com/pinkgorilla/mongodb-toolkit.git",
+    "mssql": "^3.3.0",
+    "pdfmake": "^0.1.18",
+    "sha1": "^1.1.1"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.15",
+    "codeclimate-test-reporter": "^0.4.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.0.0",
+    "mocha-lcov-reporter": "^1.2.0",
+    "should": "^10.0.0"
+  },
+  "directories": {
+    "test": "test"
+  }
+}
