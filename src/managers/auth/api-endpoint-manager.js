@@ -3,7 +3,7 @@
 var ObjectId = require("mongodb").ObjectId;
 require("mongodb-toolkit");
 var i18n = require('dl-i18n');
-var DLModels = require('dl-models');
+var DLModels = require('buka-kamar-model');
 var map = DLModels.map;
 var ApiEndpoint = DLModels.auth.ApiEndpoint;
 var BaseManager = require('module-toolkit').BaseManager;
