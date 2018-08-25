@@ -3,18 +3,16 @@
 var ObjectId = require("mongodb").ObjectId;
 require("mongodb-toolkit");
 var i18n = require('dl-i18n');
-var DLModels = require('dl-models');
+var DLModels = require('buka-kamar-model');
 var map = DLModels.map;
 var Role = DLModels.auth.Role;
 var BaseManager = require('module-toolkit').BaseManager;
-var UnitManager = require("../master/unit-manager");
 var AccountManager = require("./account-manager");
 
 module.exports = class RoleManager extends BaseManager {
     constructor(db, user) {
         super(db, user);
         this.collection = this.db.use(map.auth.collection.Role);
-        this.unitManager = new UnitManager(db, user);
         this.accountManager = new AccountManager(db, user);
     }
 
@@ -93,14 +91,13 @@ module.exports = class RoleManager extends BaseManager {
                     }]
             });
             valid.permissions = valid.permissions instanceof Array ? valid.permissions : [];
-            var getUnits = valid.permissions.map((permission) => {
-                return this.unitManager.getSingleByIdOrDefault(permission.unitId);
-            })
+            // var getUnits = valid.permissions.map((permission) => {
+            //     return this.unitManager.getSingleByIdOrDefault(permission.unitId);
+            // })
             // 2. begin: Validation.
-            Promise.all([getDuplicateRole].concat(getUnits))
+            Promise.all([getDuplicateRole])
                 .then(results => {
                     var _duplicateRole = results[0];
-                    var _units = results.splice(1);
 
                     if (!valid.code || valid.code == '')
                         errors["code"] = "Kode harus diisi";
@@ -115,20 +112,20 @@ module.exports = class RoleManager extends BaseManager {
                     var permissionErrors = [];
                     for (var permission of valid.permissions) {
                         var permissionError = {};
-                        var unit = _units.find((u) => {
-                            return u._id.toString() === permission.unitId.toString();
-                        });
+                        // var unit = _units.find((u) => {
+                        //     return u._id.toString() === permission.unitId.toString();
+                        // });
 
-                        if (!unit) {
-                            permissionError["unit"] = i18n.__("Role.units.unit.isRequired:%s is required", i18n.__("Role.units.unit._:Unit")); //"Nama barang tidak boleh kosong";
-                            permissionError["unitId"] = i18n.__("Role.units.unitId.isRequired:%s is required", i18n.__("Role.units.unitId._:Unit Id")); //"Nama barang tidak boleh kosong";
-                        }
-                        if (Object.getOwnPropertyNames(permissionError).length > 0)
-                            permissionErrors.push(permissionError);
-                        else {
-                            permission.unit = unit;
-                            permission.unitId = unit._id;
-                        }
+                        // if (!unit) {
+                        //     permissionError["unit"] = i18n.__("Role.units.unit.isRequired:%s is required", i18n.__("Role.units.unit._:Unit")); //"Nama barang tidak boleh kosong";
+                        //     permissionError["unitId"] = i18n.__("Role.units.unitId.isRequired:%s is required", i18n.__("Role.units.unitId._:Unit Id")); //"Nama barang tidak boleh kosong";
+                        // }
+                        // if (Object.getOwnPropertyNames(permissionError).length > 0)
+                        //     permissionErrors.push(permissionError);
+                        // else {
+                        //     permission.unit = unit;
+                        //     permission.unitId = unit._id;
+                        // }
                     }
                     if (permissionErrors.length > 0)
                         errors.permissions = permissionErrors;
