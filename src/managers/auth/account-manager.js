@@ -2,7 +2,7 @@
 
 var ObjectId = require("mongodb").ObjectId;
 require("mongodb-toolkit");
-var i18n = require('dl-i18n');
+// var i18n = require('dl-i18n');
 var Models = require('buka-kamar-model');
 var map = Models.map;
 var Account = Models.auth.Account;
