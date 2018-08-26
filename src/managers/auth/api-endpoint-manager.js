@@ -2,7 +2,7 @@
 
 var ObjectId = require("mongodb").ObjectId;
 require("mongodb-toolkit");
-var i18n = require('dl-i18n');
+// var i18n = require('dl-i18n');
 var DLModels = require('buka-kamar-model');
 var map = DLModels.map;
 var ApiEndpoint = DLModels.auth.ApiEndpoint;
@@ -111,8 +111,8 @@ module.exports = class ApiEndpointManager extends BaseManager {
                         });
 
                         if (!_role) {
-                            roleError["role"] = i18n.__("Role.isRequired:%s is required", i18n.__("Role._:Role")); //"Nama barang tidak boleh kosong";
-                            roleError["roleId"] = i18n.__("Role.isRequired:%s is required", i18n.__("Role._:Role")); //"Nama barang tidak boleh kosong";
+                            roleError["role"] = "Role tidak boleh kosong"; //"Nama barang tidak boleh kosong";
+                            roleError["roleId"] = "Role harus diisi"; //"Nama barang tidak boleh kosong";
                         }
                         if (Object.getOwnPropertyNames(roleError).length > 0)
                             roleErrors.push(roleError);
